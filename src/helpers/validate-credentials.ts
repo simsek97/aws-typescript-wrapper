@@ -14,7 +14,7 @@ import {
   ListAttachedUserPoliciesCommandOutput,
 } from "@aws-sdk/client-iam";
 
-import { isLocalDev } from "helpers/settings";
+import { isLocalDev } from "./settings";
 
 export interface CredentialsInput {
   accessKey: string;
