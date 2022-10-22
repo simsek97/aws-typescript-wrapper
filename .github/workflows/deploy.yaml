@@ -59,4 +59,4 @@ jobs:
         run: echo "::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)"
 
       - name: Publish
-        run: npm publish
+        run: npm login && npm publish
