@@ -58,13 +58,7 @@ jobs:
         id: tag-version
         run: echo "::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)"
 
-      - name: Create Release
-        uses: ncipollo/release-action@v1
+      - name: Publish
+        run: yarn publish
         env:
-          # GITHUB_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        with:
-          tag: ${{ steps.tag-version.outputs.LATEST_TAG }}
-          name: Release ${{ steps.tag-version.outputs.LATEST_TAG }}
-          draft: false
-          prerelease: false
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
