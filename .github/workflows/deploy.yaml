@@ -46,7 +46,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> .npmrc
 
       - name: Set up NPM registry
-        run: echo "registry=https://www.npmjs.com/package/aws-typescript-wrapper" >> .npmrc
+        run: echo "registry=https://registry.npmjs.org" >> .npmrc
 
       - name: Set up NPM auth
         run: echo "always-auth=true" >> .npmrc
