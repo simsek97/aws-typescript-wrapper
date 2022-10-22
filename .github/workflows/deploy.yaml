@@ -43,7 +43,7 @@ jobs:
           registry-url: "https://registry.npmjs.org/"
 
       - name: Set up NPM authentication
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" >> .npmrc
 
       - name: Set up NPM registry
         run: echo "registry=https://registry.npmjs.org" >> .npmrc
@@ -60,5 +60,3 @@ jobs:
 
       - name: Publish
         run: npm publish — access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
