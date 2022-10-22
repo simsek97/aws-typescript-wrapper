@@ -14,8 +14,6 @@ import {
   ListAttachedUserPoliciesCommandOutput,
 } from "@aws-sdk/client-iam";
 
-import { isLocalDev } from "./settings";
-
 export interface CredentialsInput {
   accessKey: string;
   secretKey: string;
@@ -120,13 +118,7 @@ export async function validateCredentials({
     // Get the managed policies attached to the principal and ensure that one of them is AdministratorAccess
     userName = last(arn.split("/")) as string;
 
-    if (isLocalDev) {
-      // For local dev, we need to skip the checking of the AdministratorAccess policy
-      // TODO - re-examine this logic later
-      return { accountId, userArn: arn, userName };
-    }
-
-    let params: ListAttachedUserPoliciesCommandInput = {
+    const params: ListAttachedUserPoliciesCommandInput = {
       UserName: userName,
       MaxItems: 999,
     };

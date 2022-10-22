@@ -8,7 +8,7 @@ import {
   HistoryEvent,
 } from "@aws-sdk/client-sfn";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface GetSFNHistory extends CredentialsInput {
   executionArn: string;
@@ -80,14 +80,14 @@ export async function getExecutionHistory({
     },
   });
 
-  let params: GetExecutionHistoryCommandInput = {
+  const params: GetExecutionHistoryCommandInput = {
     executionArn,
     includeExecutionData: false,
     maxResults: 1000,
     reverseOrder: true,
   };
+  const events: HistoryEvent[] = [];
   let data: GetExecutionHistoryCommandOutput;
-  let events: HistoryEvent[] = [];
 
   do {
     data = await cfnClient.send(new GetExecutionHistoryCommand(params));

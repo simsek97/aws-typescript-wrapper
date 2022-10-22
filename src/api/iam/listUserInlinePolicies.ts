@@ -5,7 +5,7 @@ import {
   ListUserPoliciesCommandOutput,
 } from "@aws-sdk/client-iam";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface ListUserPoliciesInput extends CredentialsInput {
   userName: string;
@@ -25,7 +25,7 @@ export async function listUserInlinePolicies({
     },
   });
 
-  let params: ListUserPoliciesCommandInput = {
+  const params: ListUserPoliciesCommandInput = {
     UserName: userName,
     MaxItems: 999,
   };

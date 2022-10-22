@@ -6,7 +6,7 @@ import {
   Group,
 } from "@aws-sdk/client-iam";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface ListUserGroupsInput extends CredentialsInput {
   userName: string;
@@ -26,7 +26,7 @@ export async function listUserGroups({
     },
   });
 
-  let params: ListGroupsForUserCommandInput = {
+  const params: ListGroupsForUserCommandInput = {
     UserName: userName,
     MaxItems: 999,
   };

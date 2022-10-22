@@ -6,7 +6,7 @@ import {
   StackEvent,
 } from "@aws-sdk/client-cloudformation";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface DescribeStackEventsInput extends CredentialsInput {
   stackName: string;
@@ -29,7 +29,7 @@ export async function describeStackEvents({
     },
   });
 
-  let params: DescribeStackEventsCommandInput = { StackName: stackName };
+  const params: DescribeStackEventsCommandInput = { StackName: stackName };
   let data: DescribeStackEventsCommandOutput;
 
   do {

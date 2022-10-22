@@ -4,7 +4,7 @@ import {
   PutDashboardCommandInput,
 } from "@aws-sdk/client-cloudwatch";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface PutDashboardInput extends CredentialsInput {
   name: string;

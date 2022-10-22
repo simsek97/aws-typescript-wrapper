@@ -4,7 +4,7 @@ import {
   ListObjectsV2CommandInput,
 } from "@aws-sdk/client-s3";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface S3ListObjectsInput extends CredentialsInput {
   bucketName: string;
@@ -34,13 +34,13 @@ export async function listObjects({
     },
   });
 
-  let params: ListObjectsV2CommandInput = {
+  const params: ListObjectsV2CommandInput = {
     Bucket: bucketName,
     MaxKeys: 1000,
     Prefix: prefix,
   };
 
-  let result: S3Object[] = [];
+  const result: S3Object[] = [];
 
   do {
     const data = await client.send(new ListObjectsV2Command(params));

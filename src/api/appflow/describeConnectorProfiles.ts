@@ -22,7 +22,7 @@ export async function describeConnectorProfiles({
     },
   });
 
-  let params: DescribeConnectorProfilesCommandInput = {
+  const params: DescribeConnectorProfilesCommandInput = {
     connectorType: ConnectorType.SALESFORCE,
     maxResults: 100,
   };

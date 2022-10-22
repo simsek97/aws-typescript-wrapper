@@ -1,0 +1,66 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: 18.7.0
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+  publish:
+    name: Publish
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Set up NPM authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> .npmrc
+
+      - name: Set up NPM registry
+        run: echo "registry=https://registry.npmjs.org/" >> .npmrc
+
+      - name: Create version
+        run: git config --global user.email "simsek97@gmail.com" && git config --global user.name "Simsek Mert" && yarn version --patch
+
+      - name: Get latest tag
+        id: tag-version
+        run: echo "::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)"
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+        with:
+          tag: ${{ steps.tag-version.outputs.LATEST_TAG }}
+          name: Release ${{ steps.tag-version.outputs.LATEST_TAG }}
+          draft: false
+          prerelease: false

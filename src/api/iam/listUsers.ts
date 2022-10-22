@@ -6,7 +6,7 @@ import {
   User,
 } from "@aws-sdk/client-iam";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface ListUsersInput extends CredentialsInput {
   pathPrefix?: string;
@@ -29,7 +29,7 @@ export async function listUsers({
     },
   });
 
-  let params: ListUsersCommandInput = {
+  const params: ListUsersCommandInput = {
     PathPrefix: pathPrefix,
     MaxItems: 1000,
   };

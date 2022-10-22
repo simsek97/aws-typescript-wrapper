@@ -1,7 +1,7 @@
 import { IAMClient, DeleteAccessKeyCommand } from "@aws-sdk/client-iam";
 
 import { deactivateAccessKey } from "./deactivateAccessKey";
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface DeleteAccessKeyInput extends CredentialsInput {
   userName: string;

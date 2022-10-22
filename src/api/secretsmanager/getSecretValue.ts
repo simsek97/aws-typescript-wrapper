@@ -5,7 +5,7 @@ import {
   GetSecretValueCommandOutput,
 } from "@aws-sdk/client-secrets-manager";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface GetSecretValueInput extends CredentialsInput {
   secretArn: string;

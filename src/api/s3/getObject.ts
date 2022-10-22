@@ -13,7 +13,7 @@ export interface S3GetJsonInput extends CredentialsInput {
 
 async function streamToString(stream: ReadableStream): Promise<string> {
   const reader = stream.getReader();
-  let done: boolean = false;
+  let done = false;
   const decoder = new TextDecoder();
   let string = "";
   do {

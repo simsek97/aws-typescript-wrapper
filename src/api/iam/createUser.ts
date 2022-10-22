@@ -5,7 +5,7 @@ import {
   User,
 } from "@aws-sdk/client-iam";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface CreateUserInput extends CredentialsInput {
   pathPrefix: string;

@@ -7,7 +7,7 @@ import {
   ListStacksCommandOutput,
 } from "@aws-sdk/client-cloudformation";
 
-import { CredentialsInput } from "helpers/validate-credentials";
+import { CredentialsInput } from "../../helpers/validate-credentials";
 
 export interface ListStacksInput extends CredentialsInput {
   statusArray?: StackStatus[];
@@ -27,10 +27,10 @@ export async function listStacks({
     },
   });
 
-  let params: ListStacksCommandInput = { StackStatusFilter: statusArray };
+  const params: ListStacksCommandInput = { StackStatusFilter: statusArray };
   let data: ListStacksCommandOutput;
 
-  let result: StackSummary[] = [];
+  const result: StackSummary[] = [];
 
   do {
     data = await client.send(new ListStacksCommand(params));
