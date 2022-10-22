@@ -1,6 +1,6 @@
 {
   "name": "aws-typescript-wrapper",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "AWS Typescript Wrapper is a library that makes communication easier with AWS services using Javascript SDK.",
   "author": "Simsek Mert <simsek97@gmail.com>",
   "license": "MIT",
