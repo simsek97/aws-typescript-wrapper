@@ -59,6 +59,6 @@ jobs:
         run: echo "::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)"
 
       - name: Publish
-        run: yarn publish
+        run: npm publish — access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
