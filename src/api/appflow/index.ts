@@ -1,9 +1,5 @@
-import { describeConnectorEntity } from "./describeConnectorEntity";
-import { describeConnectorProfiles } from "./describeConnectorProfiles";
-import { listConnectorEntities } from "./listConnectorEntities";
+import { describeConnectorEntity } from './describeConnectorEntity';
+import { describeConnectorProfiles } from './describeConnectorProfiles';
+import { listConnectorEntities } from './listConnectorEntities';
 
-export {
-  describeConnectorEntity,
-  describeConnectorProfiles,
-  listConnectorEntities,
-};
+export { describeConnectorEntity, describeConnectorProfiles, listConnectorEntities };

@@ -3,7 +3,7 @@ import {
   ConnectorType,
   DescribeConnectorProfilesCommand,
   DescribeConnectorProfilesCommandInput,
-} from "@aws-sdk/client-appflow";
+} from '@aws-sdk/client-appflow';
 
 export async function describeConnectorProfiles({
   accessKey,
@@ -29,15 +29,9 @@ export async function describeConnectorProfiles({
   const names: string[] = [];
 
   do {
-    const data = await appFlowClient.send(
-      new DescribeConnectorProfilesCommand(params)
-    );
+    const data = await appFlowClient.send(new DescribeConnectorProfilesCommand(params));
     params.nextToken = data.nextToken;
-    names.push(
-      ...(data.connectorProfileDetails ?? []).map(
-        (connector) => connector.connectorProfileName as string
-      )
-    );
+    names.push(...(data.connectorProfileDetails ?? []).map((connector) => connector.connectorProfileName as string));
   } while (params.nextToken);
 
   return names;

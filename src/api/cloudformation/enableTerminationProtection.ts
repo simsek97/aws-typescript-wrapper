@@ -2,8 +2,8 @@ import {
   CloudFormationClient,
   UpdateTerminationProtectionCommand,
   UpdateTerminationProtectionCommandInput,
-} from "@aws-sdk/client-cloudformation";
-import { CredentialsInput } from "../../helpers/validate-credentials";
+} from '@aws-sdk/client-cloudformation';
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface EnableTerminationProtectionInput extends CredentialsInput {
   stackName: string;

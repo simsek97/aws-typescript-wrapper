@@ -1,11 +1,11 @@
-import _get from "lodash/get";
+import _get from 'lodash/get';
 import {
   AppflowClient,
   ConnectorType,
   DescribeConnectorEntityCommand,
   DescribeConnectorEntityCommandInput,
   ConnectorEntityField,
-} from "@aws-sdk/client-appflow";
+} from '@aws-sdk/client-appflow';
 
 export async function describeConnectorEntity({
   accessKey,
@@ -33,18 +33,14 @@ export async function describeConnectorEntity({
     connectorProfileName: connectionName,
     connectorEntityName: objectName,
   };
-  const data = await appFlowClient.send(
-    new DescribeConnectorEntityCommand(params)
-  );
+  const data = await appFlowClient.send(new DescribeConnectorEntityCommand(params));
   const fields = data.connectorEntityFields ?? [];
-  const extract = (
-    field: ConnectorEntityField
-  ): { name: string; label: string; type: string } => {
+  const extract = (field: ConnectorEntityField): { name: string; label: string; type: string } => {
     return {
       // see https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-appflow/modules/connectorentityfield.html
-      type: _get(field, "supportedFieldTypeDetails.v1.fieldType", ""), // TODO - what will happen if appflow changes from v1 to v2?
-      name: field.identifier ?? "",
-      label: field.label ?? "",
+      type: _get(field, 'supportedFieldTypeDetails.v1.fieldType', ''), // TODO - what will happen if appflow changes from v1 to v2?
+      name: field.identifier ?? '',
+      label: field.label ?? '',
     };
   };
 

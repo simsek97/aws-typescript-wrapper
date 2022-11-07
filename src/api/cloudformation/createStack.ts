@@ -4,8 +4,8 @@ import {
   CreateStackCommand,
   CreateStackCommandInput,
   Parameter,
-} from "@aws-sdk/client-cloudformation";
-import { CredentialsInput } from "../../helpers/validate-credentials";
+} from '@aws-sdk/client-cloudformation';
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface CreateStackInput extends CredentialsInput {
   parameters: Parameter[];
@@ -47,5 +47,5 @@ export async function createStack({
 
   const data = await cfnClient.send(new CreateStackCommand(params));
 
-  return data.StackId ?? "";
+  return data.StackId ?? '';
 }

@@ -1,10 +1,6 @@
-import {
-  S3Client,
-  GetObjectCommand,
-  GetObjectCommandInput,
-} from "@aws-sdk/client-s3";
+import { S3Client, GetObjectCommand, GetObjectCommandInput } from '@aws-sdk/client-s3';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface S3GetJsonInput extends CredentialsInput {
   bucketName: string;
@@ -15,7 +11,7 @@ async function streamToString(stream: ReadableStream): Promise<string> {
   const reader = stream.getReader();
   let done = false;
   const decoder = new TextDecoder();
-  let string = "";
+  let string = '';
   do {
     const result = await reader.read();
     done = result.done;
@@ -48,7 +44,7 @@ export async function getObject({
   const params: GetObjectCommandInput = {
     Bucket: bucketName,
     Key: objectKey,
-    ResponseContentType: "application/json",
+    ResponseContentType: 'application/json',
   };
 
   const data = await cfnClient.send(new GetObjectCommand(params));
@@ -58,8 +54,6 @@ export async function getObject({
     const jsonStr = await streamToString(data.Body as ReadableStream);
     return JSON.parse(jsonStr);
   } catch (error) {
-    throw new Error(
-      `Couldn't get or parse the json file at "${objectKey}". Error ${error}`
-    );
+    throw new Error(`Couldn't get or parse the json file at "${objectKey}". Error ${error}`);
   }
 }

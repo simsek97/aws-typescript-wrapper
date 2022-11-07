@@ -1,12 +1,6 @@
-import {
-  IAMClient,
-  ListUsersCommand,
-  ListUsersCommandInput,
-  ListUsersCommandOutput,
-  User,
-} from "@aws-sdk/client-iam";
+import { IAMClient, ListUsersCommand, ListUsersCommandInput, ListUsersCommandOutput, User } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface ListUsersInput extends CredentialsInput {
   pathPrefix?: string;
@@ -15,12 +9,7 @@ export interface ListUsersInput extends CredentialsInput {
 /**
  * Returns a list of IAM users matching the given path prefix
  */
-export async function listUsers({
-  accessKey,
-  secretKey,
-  region,
-  pathPrefix,
-}: ListUsersInput): Promise<User[]> {
+export async function listUsers({ accessKey, secretKey, region, pathPrefix }: ListUsersInput): Promise<User[]> {
   const client = new IAMClient({
     region,
     credentials: {

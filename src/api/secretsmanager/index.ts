@@ -1,3 +1,3 @@
-import { getSecretValue } from "./getSecretValue";
+import { getSecretValue } from './getSecretValue';
 
 export { getSecretValue };

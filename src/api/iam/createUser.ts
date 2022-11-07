@@ -1,11 +1,6 @@
-import {
-  IAMClient,
-  CreateUserCommand,
-  CreateUserCommandInput,
-  User,
-} from "@aws-sdk/client-iam";
+import { IAMClient, CreateUserCommand, CreateUserCommandInput, User } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface CreateUserInput extends CredentialsInput {
   pathPrefix: string;
@@ -37,9 +32,7 @@ export async function createUser({
 
   const data = await client.send(new CreateUserCommand(params));
   if (!data.User) {
-    throw new Error(
-      `No user was returned from calling AWS IAM API (createUser)`
-    );
+    throw new Error(`No user was returned from calling AWS IAM API (createUser)`);
   }
 
   return data.User;

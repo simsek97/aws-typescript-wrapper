@@ -1,10 +1,6 @@
-import {
-  S3Client,
-  PutObjectCommand,
-  PutObjectCommandInput,
-} from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface S3PutJsonInput extends CredentialsInput {
   bucketName: string;
@@ -37,8 +33,8 @@ export async function putObject({
     Bucket: bucketName,
     Key: objectKey,
     Body: jsonContent,
-    ContentType: "application/json",
-    ServerSideEncryption: "aws:kms",
+    ContentType: 'application/json',
+    ServerSideEncryption: 'aws:kms',
     SSEKMSKeyId: kmsKeyId,
   };
 

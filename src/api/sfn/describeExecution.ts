@@ -1,10 +1,6 @@
-import {
-  SFNClient,
-  DescribeExecutionCommand,
-  DescribeExecutionCommandOutput,
-} from "@aws-sdk/client-sfn";
+import { SFNClient, DescribeExecutionCommand, DescribeExecutionCommandOutput } from '@aws-sdk/client-sfn';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface DescribeSFNInput extends CredentialsInput {
   executionArn: string;
@@ -27,9 +23,7 @@ export async function describeExecution({
     },
   });
 
-  const result = await cfnClient.send(
-    new DescribeExecutionCommand({ executionArn })
-  );
+  const result = await cfnClient.send(new DescribeExecutionCommand({ executionArn }));
 
   return result;
 }

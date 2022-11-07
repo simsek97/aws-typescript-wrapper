@@ -6,14 +6,14 @@ import {
   DeleteUserPolicyCommand,
   DetachUserPolicyCommand,
   RemoveUserFromGroupCommand,
-} from "@aws-sdk/client-iam";
+} from '@aws-sdk/client-iam';
 
-import { deleteAccessKey } from "./deleteAccessKey";
-import { listAccessKeys } from "./listAccessKeys";
-import { listUserGroups } from "./listUserGroups";
-import { listUserInlinePolicies } from "./listUserInlinePolicies";
-import { listUserPolicies } from "./listUserPolicies";
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { deleteAccessKey } from './deleteAccessKey';
+import { listAccessKeys } from './listAccessKeys';
+import { listUserGroups } from './listUserGroups';
+import { listUserInlinePolicies } from './listUserInlinePolicies';
+import { listUserPolicies } from './listUserPolicies';
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface DeleteUserInput extends CredentialsInput {
   userName: string;
@@ -35,12 +35,7 @@ export interface DeleteUserInput extends CredentialsInput {
  * - group memberships
  *
  */
-export async function deleteUser({
-  accessKey,
-  secretKey,
-  region,
-  userName,
-}: DeleteUserInput): Promise<void> {
+export async function deleteUser({ accessKey, secretKey, region, userName }: DeleteUserInput): Promise<void> {
   const client = new IAMClient({
     region,
     credentials: {
@@ -53,7 +48,7 @@ export async function deleteUser({
   try {
     await client.send(new DeleteLoginProfileCommand({ UserName: userName }));
   } catch (error) {
-    if (error instanceof IAMServiceException && error.name === "NoSuchEntity") {
+    if (error instanceof IAMServiceException && error.name === 'NoSuchEntity') {
       // expected if there was no login profile, so this is normal, no need to throw an exception
     } else {
       throw error;
@@ -72,7 +67,7 @@ export async function deleteUser({
       new DeleteUserPolicyCommand({
         UserName: userName,
         PolicyName: policyName,
-      })
+      }),
     );
   }
 
@@ -88,7 +83,7 @@ export async function deleteUser({
       new DetachUserPolicyCommand({
         UserName: userName,
         PolicyArn: policy.PolicyArn,
-      })
+      }),
     );
   }
 
@@ -104,7 +99,7 @@ export async function deleteUser({
       new RemoveUserFromGroupCommand({
         UserName: userName,
         GroupName: group.GroupName,
-      })
+      }),
     );
   }
 

@@ -4,9 +4,9 @@ import {
   ListExecutionsCommandInput,
   ListExecutionsCommandOutput,
   ExecutionListItem,
-} from "@aws-sdk/client-sfn";
+} from '@aws-sdk/client-sfn';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface GetLatestSFN extends CredentialsInput {
   stateMachineArn: string;

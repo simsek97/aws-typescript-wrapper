@@ -1,6 +1,6 @@
-import { IAMClient, UpdateAccessKeyCommand } from "@aws-sdk/client-iam";
+import { IAMClient, UpdateAccessKeyCommand } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface UpdateAccessKeyInput extends CredentialsInput {
   userName: string;
@@ -26,7 +26,7 @@ export async function updateAccessKey({
     new UpdateAccessKeyCommand({
       UserName: userName,
       AccessKeyId: accessKeyId,
-      Status: "Active",
-    })
+      Status: 'Active',
+    }),
   );
 }

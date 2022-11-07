@@ -1,7 +1,7 @@
-import { IAMClient, DeleteAccessKeyCommand } from "@aws-sdk/client-iam";
+import { IAMClient, DeleteAccessKeyCommand } from '@aws-sdk/client-iam';
 
-import { deactivateAccessKey } from "./deactivateAccessKey";
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { deactivateAccessKey } from './deactivateAccessKey';
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface DeleteAccessKeyInput extends CredentialsInput {
   userName: string;
@@ -34,7 +34,5 @@ export async function deleteAccessKey({
     accessKeyId,
   });
   // await delay(1); // Give it a second, this is not the best way to address eventual consistency, but good enough for now
-  await client.send(
-    new DeleteAccessKeyCommand({ UserName: userName, AccessKeyId: accessKeyId })
-  );
+  await client.send(new DeleteAccessKeyCommand({ UserName: userName, AccessKeyId: accessKeyId }));
 }

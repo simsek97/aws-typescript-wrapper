@@ -1,10 +1,6 @@
-import {
-  IAMClient,
-  CreateAccessKeyCommand,
-  AccessKey,
-} from "@aws-sdk/client-iam";
+import { IAMClient, CreateAccessKeyCommand, AccessKey } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface CreateAccessKeyInput extends CredentialsInput {
   userName: string;
@@ -27,13 +23,9 @@ export async function createAccessKey({
     },
   });
 
-  const data = await client.send(
-    new CreateAccessKeyCommand({ UserName: userName })
-  );
+  const data = await client.send(new CreateAccessKeyCommand({ UserName: userName }));
   if (!data.AccessKey) {
-    throw new Error(
-      `No access key was returned from calling AWS IAM API (createAccessKey)`
-    );
+    throw new Error(`No access key was returned from calling AWS IAM API (createAccessKey)`);
   }
 
   return data.AccessKey;

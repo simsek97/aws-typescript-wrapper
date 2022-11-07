@@ -3,9 +3,9 @@ import {
   GetSecretValueCommand,
   GetSecretValueCommandInput,
   GetSecretValueCommandOutput,
-} from "@aws-sdk/client-secrets-manager";
+} from '@aws-sdk/client-secrets-manager';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface GetSecretValueInput extends CredentialsInput {
   secretArn: string;
@@ -40,14 +40,12 @@ export async function getSecretValue({
 
   let secret: string | undefined;
 
-  const response: GetSecretValueCommandOutput = await client.send(
-    new GetSecretValueCommand(params)
-  );
+  const response: GetSecretValueCommandOutput = await client.send(new GetSecretValueCommand(params));
 
   if (response.SecretString) {
     secret = response.SecretString;
   } else {
-    throw new Error("Unable to get secret string!");
+    throw new Error('Unable to get secret string!');
   }
 
   const unsafeJson: any = JSON.parse(secret);

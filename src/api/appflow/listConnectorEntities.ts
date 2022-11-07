@@ -1,10 +1,10 @@
-import _get from "lodash/get";
+import _get from 'lodash/get';
 import {
   AppflowClient,
   ConnectorType,
   ListConnectorEntitiesCommand,
   ListConnectorEntitiesCommandInput,
-} from "@aws-sdk/client-appflow";
+} from '@aws-sdk/client-appflow';
 
 export interface IRawObject {
   name: string;
@@ -36,10 +36,8 @@ export async function listConnectorEntities({
     connectorType: ConnectorType.SALESFORCE,
     connectorProfileName: connectionName,
   };
-  const data = await appFlowClient.send(
-    new ListConnectorEntitiesCommand(params)
-  );
-  const objects = _get(data, "connectorEntityMap.Objects", []);
+  const data = await appFlowClient.send(new ListConnectorEntitiesCommand(params));
+  const objects = _get(data, 'connectorEntityMap.Objects', []);
 
   return objects.map((obj: { name: string; label: string }) => ({
     name: obj.name,

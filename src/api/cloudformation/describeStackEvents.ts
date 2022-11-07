@@ -4,9 +4,9 @@ import {
   DescribeStackEventsCommandInput,
   DescribeStackEventsCommandOutput,
   StackEvent,
-} from "@aws-sdk/client-cloudformation";
+} from '@aws-sdk/client-cloudformation';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface DescribeStackEventsInput extends CredentialsInput {
   stackName: string;

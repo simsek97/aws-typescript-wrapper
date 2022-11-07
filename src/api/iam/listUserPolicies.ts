@@ -4,9 +4,9 @@ import {
   ListAttachedUserPoliciesCommandInput,
   ListAttachedUserPoliciesCommandOutput,
   AttachedPolicy,
-} from "@aws-sdk/client-iam";
+} from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface ListUserPoliciesInput extends CredentialsInput {
   userName: string;
@@ -36,8 +36,7 @@ export async function listUserPolicies({
   do {
     data = await client.send(new ListAttachedUserPoliciesCommand(params));
     params.Marker = data.Marker;
-    if (data.AttachedPolicies && data.AttachedPolicies.length > 0)
-      result.push(...data.AttachedPolicies);
+    if (data.AttachedPolicies && data.AttachedPolicies.length > 0) result.push(...data.AttachedPolicies);
   } while (data.IsTruncated);
 
   return result;

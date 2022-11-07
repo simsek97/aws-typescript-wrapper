@@ -1,18 +1,14 @@
-import last from "lodash/last";
-import trim from "lodash/trim";
-import some from "lodash/some";
-import {
-  STSClient,
-  GetCallerIdentityCommand,
-  STSServiceException,
-} from "@aws-sdk/client-sts";
+import last from 'lodash/last';
+import trim from 'lodash/trim';
+import some from 'lodash/some';
+import { STSClient, GetCallerIdentityCommand, STSServiceException } from '@aws-sdk/client-sts';
 import {
   IAMClient,
   IAMServiceException,
   ListAttachedUserPoliciesCommand,
   ListAttachedUserPoliciesCommandInput,
   ListAttachedUserPoliciesCommandOutput,
-} from "@aws-sdk/client-iam";
+} from '@aws-sdk/client-iam';
 
 export interface CredentialsInput {
   accessKey: string;
@@ -21,10 +17,10 @@ export interface CredentialsInput {
 }
 
 export enum CredentialsValidationErrorCode {
-  NotAdmin = "NOT_ADMIN",
-  InvalidKeys = "INVALID_KEYS",
-  AccountMismatch = "ACCOUNT_MISMATCH",
-  Unknown = "UNKNOWN",
+  NotAdmin = 'NOT_ADMIN',
+  InvalidKeys = 'INVALID_KEYS',
+  AccountMismatch = 'ACCOUNT_MISMATCH',
+  Unknown = 'UNKNOWN',
 }
 
 export interface CredentialsValidationResult {
@@ -38,7 +34,7 @@ export class CredentialsValidationException extends Error {
   rootCause: Error | undefined;
   constructor(code: CredentialsValidationErrorCode, rootCause?: Error) {
     super(rootCause ? `${code} - rootCause.message` : `${code}`);
-    this.name = "ValidationError";
+    this.name = 'ValidationError';
     this.code = code;
     this.rootCause = rootCause;
   }
@@ -91,10 +87,7 @@ export async function validateCredentials({
 
     // InvalidClientTokenId => incorrectly copied, or inactive or deleted
     if (err instanceof STSServiceException) {
-      if (
-        err.name === "InvalidClientTokenId" ||
-        err.name === "SignatureDoesNotMatch"
-      )
+      if (err.name === 'InvalidClientTokenId' || err.name === 'SignatureDoesNotMatch')
         code = CredentialsValidationErrorCode.InvalidKeys;
     }
 
@@ -109,14 +102,12 @@ export async function validateCredentials({
 
   if (!arn?.startsWith(`arn:aws:iam::${accountId}:user/`)) {
     // We don't know what the principal is so we consider the credentials invalid
-    throw new CredentialsValidationException(
-      CredentialsValidationErrorCode.Unknown
-    );
+    throw new CredentialsValidationException(CredentialsValidationErrorCode.Unknown);
   }
 
   try {
     // Get the managed policies attached to the principal and ensure that one of them is AdministratorAccess
-    userName = last(arn.split("/")) as string;
+    userName = last(arn.split('/')) as string;
 
     const params: ListAttachedUserPoliciesCommandInput = {
       UserName: userName,
@@ -126,19 +117,15 @@ export async function validateCredentials({
     let iamData: ListAttachedUserPoliciesCommandOutput;
 
     do {
-      iamData = await iamClient.send(
-        new ListAttachedUserPoliciesCommand(params)
-      );
+      iamData = await iamClient.send(new ListAttachedUserPoliciesCommand(params));
       found = some(iamData.AttachedPolicies, {
-        PolicyArn: "arn:aws:iam::aws:policy/AdministratorAccess",
+        PolicyArn: 'arn:aws:iam::aws:policy/AdministratorAccess',
       });
       params.Marker = iamData.Marker;
     } while (!found && iamData.IsTruncated);
 
     if (!found) {
-      throw new CredentialsValidationException(
-        CredentialsValidationErrorCode.NotAdmin
-      );
+      throw new CredentialsValidationException(CredentialsValidationErrorCode.NotAdmin);
     }
 
     return { accountId, userArn: arn, userName };
@@ -146,8 +133,7 @@ export async function validateCredentials({
     let code = CredentialsValidationErrorCode.Unknown;
 
     if (err instanceof IAMServiceException) {
-      if (err.name === "AccessDenied")
-        code = CredentialsValidationErrorCode.NotAdmin;
+      if (err.name === 'AccessDenied') code = CredentialsValidationErrorCode.NotAdmin;
     }
 
     if (err instanceof CredentialsValidationException) {

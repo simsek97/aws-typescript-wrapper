@@ -1,12 +1,12 @@
-import first from "lodash/first";
+import first from 'lodash/first';
 import {
   CloudFormationClient,
   DescribeStacksCommand,
   DescribeStacksCommandInput,
   Stack,
-} from "@aws-sdk/client-cloudformation";
+} from '@aws-sdk/client-cloudformation';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface DescribeStackInput extends CredentialsInput {
   stackName: string;

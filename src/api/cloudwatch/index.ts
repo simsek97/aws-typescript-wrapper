@@ -1,3 +1,3 @@
-import { putDashboard } from "./putDashboard";
+import { putDashboard } from './putDashboard';
 
 export { putDashboard };

@@ -1,14 +1,14 @@
-import includes from "lodash/includes";
-import isEmpty from "lodash/isEmpty";
+import includes from 'lodash/includes';
+import isEmpty from 'lodash/isEmpty';
 import {
   SFNClient,
   GetExecutionHistoryCommand,
   GetExecutionHistoryCommandInput,
   GetExecutionHistoryCommandOutput,
   HistoryEvent,
-} from "@aws-sdk/client-sfn";
+} from '@aws-sdk/client-sfn';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface GetSFNHistory extends CredentialsInput {
   executionArn: string;
@@ -17,11 +17,7 @@ export interface GetSFNHistory extends CredentialsInput {
 // NOTE: AWS SFN SDK does not have these types as enumerations :(
 // We consider any of these types as an execution failure event
 // For all event types, see https://docs.aws.amazon.com/step-functions/latest/apireference/API_HistoryEvent.html
-const executionFailureTypes = [
-  "ExecutionAborted",
-  "ExecutionFailed",
-  "ExecutionTimedOut",
-];
+const executionFailureTypes = ['ExecutionAborted', 'ExecutionFailed', 'ExecutionTimedOut'];
 
 export const isExecutionFailureEvent = (event: HistoryEvent): boolean => {
   // We want to check if this event is a failure event that represents the whole execution.
@@ -33,25 +29,23 @@ export interface ExecutionFailureInfo {
   error: string;
 }
 
-export const getExecutionFailureInfo = (
-  event: HistoryEvent
-): ExecutionFailureInfo => {
+export const getExecutionFailureInfo = (event: HistoryEvent): ExecutionFailureInfo => {
   // AWS SFN SDK has a property per event type
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sfn/modules/historyevent.html
 
-  let cause = "Unknown";
-  let error = "Unknown";
+  let cause = 'Unknown';
+  let error = 'Unknown';
 
   switch (event.type) {
-    case "ExecutionAborted":
+    case 'ExecutionAborted':
       cause = event.executionAbortedEventDetails?.cause ?? cause;
       error = event.executionAbortedEventDetails?.error ?? error;
       break;
-    case "ExecutionFailed":
+    case 'ExecutionFailed':
       cause = event.executionFailedEventDetails?.cause ?? cause;
       error = event.executionFailedEventDetails?.error ?? error;
       break;
-    case "ExecutionTimedOut":
+    case 'ExecutionTimedOut':
       cause = event.executionTimedOutEventDetails?.cause ?? cause;
       error = event.executionTimedOutEventDetails?.error ?? error;
       break;

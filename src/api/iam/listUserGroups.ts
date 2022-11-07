@@ -4,9 +4,9 @@ import {
   ListGroupsForUserCommandInput,
   ListGroupsForUserCommandOutput,
   Group,
-} from "@aws-sdk/client-iam";
+} from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from "../../helpers/validate-credentials";
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface ListUserGroupsInput extends CredentialsInput {
   userName: string;
