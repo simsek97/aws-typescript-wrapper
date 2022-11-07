@@ -5,6 +5,7 @@ import {
   DescribeConnectorEntityCommand,
   DescribeConnectorEntityCommandInput,
   ConnectorEntityField,
+  DescribeConnectorEntityCommandOutput,
 } from '@aws-sdk/client-appflow';
 
 export async function describeConnectorEntity({
@@ -33,7 +34,9 @@ export async function describeConnectorEntity({
     connectorProfileName: connectionName,
     connectorEntityName: objectName,
   };
-  const data = await appFlowClient.send(new DescribeConnectorEntityCommand(params));
+  const data: DescribeConnectorEntityCommandOutput = await appFlowClient.send(
+    new DescribeConnectorEntityCommand(params),
+  );
   const fields = data.connectorEntityFields ?? [];
   const extract = (field: ConnectorEntityField): { name: string; label: string; type: string } => {
     return {
