@@ -23,9 +23,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "prepare": "yarn build",
-    "prepublishOnly": "yarn lint",
     "postinstall": "yarn build",
-    "preversion": "yarn lint",
     "version": "yarn format && git add -A src",
     "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push",
     "test": "jest",
