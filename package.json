@@ -5,7 +5,8 @@
   "author": "Simsek Mert <simsek97@gmail.com>",
   "license": "MIT",
   "private": false,
-  "main": "src/main.ts",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/simsek97/aws-typescript-wrapper.git"
@@ -13,13 +14,20 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "bugs": {
     "url": "https://github.com/simsek97/aws-typescript-wrapper/issues"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn lint",
     "postinstall": "yarn build",
-    "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\"",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src",
+    "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push",
     "test": "jest",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "npx eslint . --ext .ts",
