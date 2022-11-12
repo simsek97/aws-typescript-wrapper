@@ -21,7 +21,8 @@
     "url": "https://github.com/simsek97/aws-typescript-wrapper/issues"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc",
+    "prepare": "yarn build",
     "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push",
     "test": "jest",
     "format": "prettier --write \"src/**/*.ts\"",
