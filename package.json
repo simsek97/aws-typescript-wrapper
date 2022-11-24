@@ -15,7 +15,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "files": [
-    "dist/**/*"
+    "lib/**/*"
   ],
   "bugs": {
     "url": "https://github.com/simsek97/aws-typescript-wrapper/issues"
