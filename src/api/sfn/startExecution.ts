@@ -1,6 +1,6 @@
 import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface StartSFNInput extends CredentialsInput {
   stateMachineArn: string;

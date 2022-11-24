@@ -6,7 +6,7 @@ import {
   Stack,
 } from '@aws-sdk/client-cloudformation';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface DescribeStackInput extends CredentialsInput {
   stackName: string;

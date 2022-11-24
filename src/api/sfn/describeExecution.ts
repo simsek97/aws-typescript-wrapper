@@ -1,6 +1,6 @@
 import { SFNClient, DescribeExecutionCommand, DescribeExecutionCommandOutput } from '@aws-sdk/client-sfn';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface DescribeSFNInput extends CredentialsInput {
   executionArn: string;

@@ -5,7 +5,7 @@ import {
   ListUserPoliciesCommandOutput,
 } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface ListUserPoliciesInput extends CredentialsInput {
   userName: string;

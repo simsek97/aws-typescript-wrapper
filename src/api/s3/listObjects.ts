@@ -1,6 +1,6 @@
 import { S3Client, ListObjectsV2Command, ListObjectsV2CommandInput } from '@aws-sdk/client-s3';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface S3ListObjectsInput extends CredentialsInput {
   bucketName: string;

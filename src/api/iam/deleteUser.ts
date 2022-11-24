@@ -13,7 +13,7 @@ import { listAccessKeys } from './listAccessKeys';
 import { listUserGroups } from './listUserGroups';
 import { listUserInlinePolicies } from './listUserInlinePolicies';
 import { listUserPolicies } from './listUserPolicies';
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface DeleteUserInput extends CredentialsInput {
   userName: string;

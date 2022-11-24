@@ -8,7 +8,7 @@ import {
   HistoryEvent,
 } from '@aws-sdk/client-sfn';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface GetSFNHistory extends CredentialsInput {
   executionArn: string;

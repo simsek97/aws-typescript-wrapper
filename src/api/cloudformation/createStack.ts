@@ -5,7 +5,7 @@ import {
   CreateStackCommandInput,
   Parameter,
 } from '@aws-sdk/client-cloudformation';
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface CreateStackInput extends CredentialsInput {
   parameters: Parameter[];

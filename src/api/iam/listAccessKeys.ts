@@ -6,7 +6,7 @@ import {
   AccessKeyMetadata,
 } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface ListAccessKeysInput extends CredentialsInput {
   userName: string;

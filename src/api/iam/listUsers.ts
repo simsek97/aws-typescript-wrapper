@@ -1,6 +1,6 @@
 import { IAMClient, ListUsersCommand, ListUsersCommandInput, ListUsersCommandOutput, User } from '@aws-sdk/client-iam';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface ListUsersInput extends CredentialsInput {
   pathPrefix?: string;

@@ -1,6 +1,6 @@
 import { SNSClient, SubscribeCommand } from '@aws-sdk/client-sns';
 
-import { CredentialsInput } from '../../helpers/validate-credentials';
+import { CredentialsInput } from 'helpers/validate-credentials';
 
 export interface SubscribeSNSInput extends CredentialsInput {
   email: string;
