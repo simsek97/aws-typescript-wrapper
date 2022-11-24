@@ -14,10 +14,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "files": [
-    "lib/**/*",
-    "tsconfig.json"
-  ],
   "bugs": {
     "url": "https://github.com/simsek97/aws-typescript-wrapper/issues"
   },
