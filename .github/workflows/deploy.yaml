@@ -9,24 +9,6 @@ env:
   NODE_VERSION: 18
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install
-        run: yarn install
-
-      - name: Build
-        run: yarn build
-
   publish:
     name: Publish
     needs: [build]
@@ -41,6 +23,12 @@ jobs:
           always-auth: true
           node-version: ${{ env.NODE_VERSION }}
           registry-url: "https://registry.npmjs.org/"
+
+      - name: Install
+        run: yarn install
+
+      - name: Build
+        run: yarn build
 
       - name: Set up NPM authentication
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" >> .npmrc
