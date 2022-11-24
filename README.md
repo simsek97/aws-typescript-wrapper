@@ -5,5 +5,11 @@ AWS Typescript Wrapper is a library that makes communication easier with AWS ser
 # Getting Started
 
 ```
+yarn add aws-typescript-wrapper
+```
+
+or
+
+```
 npm install aws-typescript-wrapper
 ```
