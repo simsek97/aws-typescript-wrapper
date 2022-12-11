@@ -1,6 +1,6 @@
 import { DynamoDBClient, PutItemCommand, PutItemCommandInput, PutItemCommandOutput } from '@aws-sdk/client-dynamodb';
 
-import { CredentialsInput } from 'helpers/validate-credentials';
+import { CredentialsInput } from '../../helpers/validate-credentials';
 
 export interface PutItemInput extends CredentialsInput {
   tableName: string;
