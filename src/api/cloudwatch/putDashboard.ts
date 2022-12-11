@@ -7,9 +7,6 @@ export interface PutDashboardInput extends CredentialsInput {
   dashboardJson: string;
 }
 
-/**
- * Creates an IAM user.
- */
 export async function putDashboard({
   accessKey,
   secretKey,
