@@ -11,8 +11,8 @@ import {
 } from '@aws-sdk/client-iam';
 
 export interface CredentialsInput {
-  accessKey: string;
-  secretKey: string;
+  accessKey?: string;
+  secretKey?: string;
   region: string;
 }
 

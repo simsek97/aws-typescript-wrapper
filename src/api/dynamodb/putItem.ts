@@ -8,13 +8,18 @@ export interface PutItemInput extends CredentialsInput {
 }
 
 export async function putItem({ accessKey, secretKey, region, tableName, item }: PutItemInput) {
-  const client = new DynamoDBClient({
-    region,
-    credentials: {
-      accessKeyId: accessKey,
-      secretAccessKey: secretKey,
-    },
-  });
+  const client =
+    accessKey && secretKey
+      ? new DynamoDBClient({
+          region,
+          credentials: {
+            accessKeyId: accessKey,
+            secretAccessKey: secretKey,
+          },
+        })
+      : new DynamoDBClient({
+          region,
+        });
 
   const params: PutItemCommandInput = {
     TableName: tableName,
