@@ -28,7 +28,7 @@ export async function updateItem({ accessKey, secretKey, region, tableName, keys
   });
 
   const attributeNames = Object.keys(item);
-  const updateExpression = `SET ${attributeNames.map((k, index) => `#setAttr${index} = :setAttr${index}`).join(', ')}`;
+  const updateExpression = `SET ${attributeNames.map((_k, index) => `#setAttr${index} = :setAttr${index}`).join(', ')}`;
 
   const expressionAttNames = attributeNames.reduce(
     (accumulator, k, index) => ({ ...accumulator, [`#setAttr${index}`]: k }),
